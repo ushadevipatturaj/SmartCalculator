@@ -6,12 +6,18 @@ def addition(num):
     print(_sum)
 
 
+def help():
+    print("The program calculates the sum of numbers")
+
+
 run = True
 while run:
     user_input = input()
     if user_input == "/exit":
         print("Bye!")
         run = False
+    elif user_input == "/help":
+        help()
     elif user_input == "":
         continue
     else:

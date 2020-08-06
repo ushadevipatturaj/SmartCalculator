@@ -141,5 +141,9 @@ files:
         CalcTest("calculator.calculator").run_tests()
   learner_created: false
 feedback_link: https://hyperskill.org/projects/74/stages/411/implement
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/74/stages/411/implement">JetBrains
+    Academy</a>
+  time: Thu, 06 Aug 2020 15:27:37 UTC
+record: 3
