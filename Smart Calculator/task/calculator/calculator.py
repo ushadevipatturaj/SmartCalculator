@@ -1,6 +1,19 @@
 # write your code here
-def addition(num1, num2):
-    print(num1 + num2)
+def addition(num):
+    _sum = 0
+    for i in range(len(num)):
+        _sum += int(num[i])
+    print(_sum)
 
-number1, number2 = map(int, (input().split()))
-addition(number1, number2)
+
+run = True
+while run:
+    user_input = input()
+    if user_input == "/exit":
+        print("Bye!")
+        run = False
+    elif user_input == "":
+        continue
+    else:
+        numbers = user_input.split()
+        addition(numbers)
