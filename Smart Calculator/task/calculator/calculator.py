@@ -1,4 +1,4 @@
-from string import digits
+from string import digits, ascii_letters
 
 
 # write your code here
@@ -22,9 +22,17 @@ def determine_sign(sign):
 def arithmetic_function(num_list):
     result = 0
     temp_val = 1
+
     for i in num_list:
-        if i in digits or ([k.isdigit() for k in i if k not in ("-" , "+")]):
-            result += (int(i) * temp_val)
+        if i in ascii_letters or (len(i) > 1 and (any([k in ascii_letters for k in i if k not in ("-", "+")]))):
+            print("Invalid expression")
+            return 0
+        if i in digits or ([k.isdigit() for k in i if k not in ("-", "+")]):
+            if len(num_list) == 1 and (i.endswith("+") or i.endswith("-")):
+                print("Invalid expression")
+                return 0
+            else:
+                result += (int(i) * temp_val)
         elif "-" in i or "+" in i:
             sign = determine_sign(i)
             if sign == "-":
@@ -50,6 +58,8 @@ while run:
         _help()
     elif user_input == "":
         continue
+    elif "/" in user_input and user_input not in ("/exit", "/help"):
+        print("Unknown command")
     else:
         numbers = user_input.split()
         arithmetic_function(numbers)
