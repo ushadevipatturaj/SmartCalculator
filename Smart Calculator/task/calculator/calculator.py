@@ -42,8 +42,6 @@ def arithmetic_function(num_list):
     print(result)
 
 
-
-
 def _help():
     print("The program calculates the sum of numbers")
 
