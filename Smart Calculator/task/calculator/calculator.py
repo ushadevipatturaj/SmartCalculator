@@ -1,6 +1,5 @@
 from string import digits, ascii_letters
 
-
 # write your code here
 def addition(num):
     _sum = 0
@@ -46,7 +45,26 @@ def _help():
     print("The program calculates the sum of numbers")
 
 
+
+def variable_store(var_list):
+    global variable_dict
+    if var_list[0].isalpha() and not any(char.isdigit() for char in var_list[0]):
+        if var_list[1].isalpha() and var_list[1] in variable_dict:
+            variable_dict[var_list[0]] = variable_dict[var_list[1]]
+        elif var_list[1].isalpha() and var_list[1] not in variable_dict:
+            print("Unknown variable")
+        elif var_list[1].isalnum() and all(char.isdigit() for char in var_list[1]):
+            variable_dict[var_list[0]] = var_list[1]
+        else:
+            print("Invalid assignment")
+    elif var_list[0].isalnum() and not var_list[0].isalpha() and not var_list[0].isnumeric():
+        print("Invalid identifier")
+
+    print(variable_dict)
+
+
 run = True
+variable_dict = {}
 while run:
     user_input = input()
     if user_input == "/exit":
@@ -58,6 +76,19 @@ while run:
         continue
     elif "/" in user_input and user_input not in ("/exit", "/help"):
         print("Unknown command")
+    elif ("+" not in user_input and "+" not in user_input) or "=" in user_input:
+        if "=" in user_input:
+            if user_input.count("=") > 1:
+                print("Invalid assignment")
+            else:
+                variables = [char.strip() for char in user_input.split("=")]
+                variable_store(variables)
+        elif user_input in variable_dict:
+            print(variable_dict[user_input])
+        elif user_input not in variable_dict:
+            print("Unknown variable")
+        else:
+            print("Invalid identifier")
     else:
         numbers = user_input.split()
         arithmetic_function(numbers)
