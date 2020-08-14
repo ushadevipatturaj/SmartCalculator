@@ -19,15 +19,26 @@ def determine_sign(sign):
 
 
 def arithmetic_function(num_list):
+    global variable_dict
+    num_list_temp = []
     result = 0
     temp_val = 1
-
     for i in num_list:
+        if i in ("+", "-") or i.isnumeric():
+            num_list_temp.append(i)
+        elif i.isalpha() and i in variable_dict:
+            num_list_temp.append(variable_dict[i])
+        elif i.isalpha() and i not in variable_dict:
+            print("Unknown variable")
+        elif "-" in i or "+" in i:
+            num_list_temp.append(determine_sign(i))
+
+    for i in num_list_temp:
         if i in ascii_letters or (len(i) > 1 and (any([k in ascii_letters for k in i if k not in ("-", "+")]))):
             print("Invalid expression")
             return 0
         if i in digits or ([k.isdigit() for k in i if k not in ("-", "+")]):
-            if len(num_list) == 1 and (i.endswith("+") or i.endswith("-")):
+            if len(num_list_temp) == 1 and (i.endswith("+") or i.endswith("-")):
                 print("Invalid expression")
                 return 0
             else:
@@ -60,7 +71,6 @@ def variable_store(var_list):
     elif var_list[0].isalnum() and not var_list[0].isalpha() and not var_list[0].isnumeric():
         print("Invalid identifier")
 
-    print(variable_dict)
 
 
 run = True
@@ -76,7 +86,7 @@ while run:
         continue
     elif "/" in user_input and user_input not in ("/exit", "/help"):
         print("Unknown command")
-    elif ("+" not in user_input and "+" not in user_input) or "=" in user_input:
+    elif ("+" not in user_input and "-" not in user_input) or "=" in user_input:
         if "=" in user_input:
             if user_input.count("=") > 1:
                 print("Invalid assignment")
